@@ -1,11 +1,14 @@
-# Logistic Regression 
+# Classification template
 
 # Data Preprocessing
 # Importing the Dataset
 dataset = read.csv('Social_Network_Ads.csv')
 dataset = dataset[,3:5]
-dataset
-install.packages('caTools')
+
+# Encoding the target feature as factor
+dataset$Purchased = factor(dataset$Purchased ,levels = c(0,1))
+
+
 # Splitting the Datset into the Training set and Test set
 # install.packages('caTools')
 library(caTools)
@@ -18,10 +21,8 @@ test_set = subset(dataset,split == FALSE)
 training_set[,1:2] = scale(training_set[,2:3])
 test_set[,2:3] = scale(test_set[,2:3])
 
-# Fitting Logistic Regression to the Training set
-classifier = glm(formula = Purchased ~ .,
-                 family = binomial,
-                 data = training_set)
+# Fitting Classification to the Training set
+
 
 # Predicting the test set results
 prob_pred = predict(classifier ,type ='response',newdata = test_set[-3])
@@ -41,7 +42,7 @@ colnames(grid_set) = c('Age', 'EstimatedSalary')
 prob_set = predict(classifier ,type = 'response',newdata = grid_set)
 y_grid = ifelse(prob_set >0.5,1,0)
 plot(set[,-3],
-     main = 'Logistic Regression (Training set)',
+     main = 'classification  (Training set)',
      xlab = 'Age',ylab = 'Estimated Salary',
      xlim = range(X1),ylim = range(X2))
 contour(X1,X2,matrix(as.numeric(y_grid),length(X1),length(X2)),add = TRUE)
