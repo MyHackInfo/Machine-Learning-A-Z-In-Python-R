@@ -1,0 +1,76 @@
+1-> Reading data from data source 
+	Using pandas lib 
+	data = pd.read_csv("data_name.csv")
+	data = pd.read_csv("data_name.csv", sep="\t", encoding ="ISO-8859-1") =>(The help for encoding error)
+
+2-> See data inside data_name database file
+	data.head() 	(Top up 5 of loaded data)
+	data.tail()		(Down 5 of loaded data)
+	data.describe()	(Use this funtion for data describe as count, mean, std, min, max, 25%, 50%, 75%)
+	data.info()		(use for see info like num of row and col and dtypes)
+	data.columns	(Use for see all columns with its name)
+	data.sample(5)	(Use for see data random row in dataset)
+	data.shape		(Use for see data shape first row other is columns)
+	data.isnull().sum()	(Use for see data is null and not null sum all missing values in rows)
+
+	dataset_name['column_name'].describe()
+
+3-> idetification of unique string value 
+	nui_num =dataframe.columns_name.unique() (When the rows value are string/text)
+	len(nui_num)
+
+4-> Removing-Special-Characters-in-a-Pandas-Dataframe
+
+https://stackoverflow.com/questions/45871731/removing-special-characters-in-a-pandas-dataframe
+
+5-> Merging the two dataset 
+	master = pd.merge(dataset_name1,dataset_name2, how="inner", left_on="dataset1_column", right_on="datset2_column")
+	master.head()		((  Note:-> the left_on and right_on are same columns in both dataset ))
+				(( Merging the two dataset we need to remove one column in df go to 6-> Stage ))
+
+6-> Removing the columns
+	master.drop(['columns_name'] , axis=1)
+
+7-> Percentage of missing value
+	round(100* (master.isnull().sum() / len(master.index)),2)
+
+8-> Removing NaNs in column
+	master= dataset[~np.isnan(dataset['column_name'])]
+
+9-> Writing the Clean dataset to an another file
+	old_dataset.to_csv("new_dataset.csv", sep=',' , index=False)
+
+10-> SNS Boxplot 
+	sns.boxplot(x="columns_name1", y="columns_name2", data=dataset_name)
+	plt.yscale('log')
+	plt.show()
+
+11-> .isin
+	df[~df['column_name'].isin(df2['column_name'])]
+	df2[~df2['column_name'].isin(df['column_name'])]   (( Reverse Applied ))
+
+12-> Replace '0' with 'na' // replace some value with other value
+	df['column_name'] = mapping['column_name'].apply(lambda x: x.replace('0', 'na'))
+
+13-> Store the value and id variables in two separate arrays
+	#store the value variables in one Series
+	value_var = df.columns[5:10]
+
+	# take the setdiff() to get the rest of the variables 
+	id_vars = np.setdiffld(df.columns, value_var)
+	print(value_var, "\")
+	print(id_var)
+
+14-> Converting the 'wide' dataframe to 'long'
+	hepl(pd.melt)
+
+	long_df = pd.melt(df, id_vars=list(id_vars), value_var=list(value_var))
+	long_df.head()
+
+15-> Renaming the column name
+	long_df.rename(columns={'old_column': 'new_column'})
+
+16-> Groupby country_column, sector_column and comput the count and sum
+	df.groupby(['country_column', 'sector_column']).amount_use.agg(['count', 'sum'])
+
+
