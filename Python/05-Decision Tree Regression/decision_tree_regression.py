@@ -28,8 +28,33 @@ regressor = DecisionTreeRegressor(random_state = 0)
 regressor.fit(X, y)
 
 # Predicting a new result
-y_pred = regressor.predict(6.5)
+y_pred = regressor.predict(X)
 
+#Training and Evaluating on the Training Set:
+#Let’s measure this regression model’s RMSE on the whole training set using Scikit-Learn’s mean_squared_error function:
+from sklearn.metrics import mean_squared_error
+tree_mse = mean_squared_error(y,y_pred)
+tree_rmse = np.sqrt(tree_mse)
+print(tree_rmse)
+
+
+# Better Evaluation Using Cross-Validation:
+    #A great alternative is to use Scikit-Learn’s cross-validation feature. The following code performs K-fold
+    #cross-validation: it randomly splits the training set into 10 distinct subsets called folds, then it trains and
+    #evaluates the Decision Tree model 10 times, picking a different fold for evaluation every time and
+    #training on the other 9 folds. The result is an array containing the 10 evaluation scores:
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(regressor, X,y,scoring="neg_mean_squared_error",cv=10)
+rmse_scores = np.sqrt(-scores)
+
+def display_scores(scores):
+    print("Scores:",scores)
+    print("Mean:",scores.mean())
+    print("Standard deviation:",scores.std())
+
+display_scores(rmse_scores)
+
+'''
 # Visualising the Decision Tree Regression results (higher resolution)
 X_grid = np.arange(min(X), max(X), 0.01)
 X_grid = X_grid.reshape((len(X_grid), 1))
@@ -39,3 +64,4 @@ plt.title('Truth or Bluff (Decision Tree Regression)')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
 plt.show()
+'''

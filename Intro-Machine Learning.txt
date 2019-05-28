@@ -1,0 +1,614 @@
+## Machine Learning? #####################################################################################################
+
+1->Machine Learning is the science (and art) of programming computers so they can learn from data.
+2->[Machine Learning is the] field of study that gives computers the ability to learn without being explicitly programmed.
+##########################################################################################################################
+
+
+## Why Use Machine Learning? ##############################################################################################
+
+1->Problems for which existing solutions require a lot of hand-tuning or long lists of rules: one Machine
+   Learning algorithm can often simplify code and perform better.
+2->Complex problems for which there is no good solution at all using a traditional approach: the best
+   Machine Learning techniques can find a solution.
+3->Fluctuating environments: a Machine Learning system can adapt to new data.
+4->Getting insights about complex problems and large amounts of data.
+#############################################################################################################
+
+
+## Types of Machine Learning Systems #############################################################################
+
+1->Whether or not they are trained with human supervision (supervised, unsupervised, semisupervised,
+   and Reinforcement Learning).
+2->Whether or not they can learn incrementally on the fly (online versus batch learning).
+3->Whether they work by simply comparing new data points to known data points, or instead detect
+   patterns in the training data and build a predictive model, much like scientists do (instance-based
+   versus model-based learning).
+#############################################################################################################
+
+
+## Supervised/Unsupervised Learning #################################################################################
+
+Machine Learning systems can be classified according to the amount and type of supervision they get
+during training. There are four major categories: 
+1->supervised learning
+2->unsupervised learning
+3->semisupervised learning
+4->Reinforcement Learning
+
+## 1->Supervised learning:: ##############################################################################################
+
+In supervised learning, the training data you feed to the algorithm includes the desired solutions, called labels.
+
+Here are some of the most important supervised learning algorithms:
+	k-Nearest Neighbors
+	Linear Regression
+	Logistic Regression
+	Support Vector Machines (SVMs)
+	Decision Trees and Random Forests
+	Neural networks2
+##############################################################################################################################
+
+
+
+## 2->Unsupervised learning::#################################################################################################
+
+In unsupervised learning, as you might guess, the training data is unlabeled. 
+The system tries to learn without a teacher.
+
+Here are some of the most important unsupervised learning algorithms:
+	Clustering::>clustering algorithm to try to detect groups of similar visitors. At no point do you tell the algorithm
+		     which group a visitor belongs to: it finds those connections without your help.
+
+		->k-Means
+		->Hierarchical Cluster Analysis (HCA)
+		->Expectation Maximization
+	
+	Visualization and dimensionality reduction::>dimensionality reduction, in which the goal is to simplify the data without losing too
+						   much information. One way to do this is to merge several correlated features into one.
+
+		->Principal Component Analysis (PCA)
+		->Kernel PCA
+		->Locally-Linear Embedding (LLE)
+		->t-distributed Stochastic Neighbor Embedding (t-SNE)
+	
+	Association rule learning::>association rule learning, in which the goal is to dig into
+				    large amounts of data and discover interesting relations between attributes.
+
+		->Apriori
+		->Eclat
+
+It is often a good idea to try to reduce the dimension of your training data using a dimensionality reduction algorithm before you
+feed it to another Machine Learning algorithm (such as a supervised learning algorithm). It will run much faster, the data will take
+up less disk and memory space, and in some cases it may also perform better.
+
+#####################################################################################################################################
+
+
+## 3->Semisupervised learning::#########################################################################################################
+
+Some algorithms can deal with partially labeled training data, usually a lot of unlabeled data and a little
+bit of labeled data. This is called semisupervised learning.
+
+Most semisupervised learning algorithms are combinations of unsupervised and supervised algorithms.
+For example, deep belief networks (DBNs) are based on unsupervised components called restricted
+Boltzmann machines (RBMs) stacked on top of one another.
+
+photo-hosting services, such as Google Photos.
+###########################################################################################################################################
+
+
+## 4->Reinforcement Learning:: ############################################################################################################
+
+Reinforcement Learning is a very different beast. The learning system, called an agent in this context,
+can observe the environment, select and perform actions, and get rewards in return (or penalties in the
+form of negative rewards. It must then learn by itself what is the best strategy, called a
+policy, to get the most reward over time.
+
+many robots implement Reinforcement Learning algorithms to learn how to walk.
+DeepMind’s AlphaGo program is also a good example of Reinforcement Learning
+
+###############################################################################################################################################
+
+
+## Batch and Online Learning :: ############################################################################################################
+
+Another criterion used to classify Machine Learning systems is whether or not the system can learn
+incrementally from a stream of incoming data.
+
+## 1->Batch learning::#################################################################################################################
+
+In batch learning, the system is incapable of learning incrementally: it must be trained using all the
+available data. This will generally take a lot of time and computing resources, so it is typically done
+offline. First the system is trained, and then it is launched into production and runs without learning
+anymore; it just applies what it has learned. This is called offline learning.
+
+Also, training on the full set of data requires a lot of computing resources (CPU, memory space, disk
+space, disk I/O, network I/O, etc.).
+
+Finally, if your system needs to be able to learn autonomously and it has limited resources (e.g., a
+smartphone application or a rover on Mars), then carrying around large amounts of training data and
+taking up a lot of resources to train for hours every day is a showstopper.
+
+Fortunately, a better option in all these cases is to use algorithms that are capable of learning
+incrementally.
+
+##########################################################################################################################################
+
+## 2-> Online Learning::########################################################################################################################
+
+In online learning, you train the system incrementally by feeding it data instances sequentially, either
+individually or by small groups called mini-batches. Each learning step is fast and cheap, so the system
+can learn about new data on the fly.
+
+Online learning is great for systems that receive data as a continuous flow (e.g., stock prices) and need to
+adapt to change rapidly or autonomously. It is also a good option if you have limited computing resources.
+
+Online learning algorithms can also be used to train systems on huge datasets that cannot fit in one
+machine’s main memory (this is called out-of-core learning). The algorithm loads part of the data, runs a
+training step on that data, and repeats the process until it has run on all of the data.
+
+One important parameter of online learning systems is how fast they should adapt to changing data: this is
+called the learning rate. If you set a high learning rate, then your system will rapidly adapt to new data,
+but it will also tend to quickly forget the old data (you don’t want a spam filter to flag only the latest kinds
+of spam it was shown).
+
+A big challenge with online learning is that if bad data is fed to the system, the system’s performance will
+gradually decline. If we are talking about a live system, your clients will notice
+
+##############################################################################################################################################
+
+
+## Instance-Based Versus Model-Based Learning::##########################################################################################################
+
+One more way to categorize Machine Learning systems is by how they generalize. Most Machine
+Learning tasks are about making predictions. This means that given a number of training examples, the
+system needs to be able to generalize to examples it has never seen before. Having a good performance
+measure on the training data is good, but insufficient; the true goal is to perform well on new instances.
+
+## 1-> Instance-based learning::####################################################################################################################
+
+Instead of just flagging emails that are identical to known spam emails, your spam filter could be
+programmed to also flag emails that are very similar to known spam emails. This requires a measure of
+similarity between two emails. A (very basic) similarity measure between two emails could be to count
+the number of words they have in common. The system would flag an email as spam if it has many words
+in common with a known spam email.
+
+This is called instance-based learning: the system learns the examples by heart, then generalizes to new
+cases using a similarity measure.
+
+## 2-> Model-based learning:: ###############################################################################################################
+
+Another way to generalize from a set of examples is to build a model of these examples, then use that
+model to make predictions. This is called model-based learning.
+
+########################################################################################################################################
+
+## what a typical Machine Learning project looks like::##################################################################################
+
+	1-> You studied the data.
+	2-> You selected a model.
+	3-> You trained it on the training data (i.e., the learning algorithm searched for the model parameter
+	4-> values that minimize a cost function).
+	5-> Finally, you applied the model to make predictions on new cases (this is called inference), hoping that this model will generalize well.
+
+
+
+## Main Challenges of Machine Learning:: #########################################################################################################
+
+## 1->Insufficient Quantity of Training Data::
+	Machine Learning is not quite there yet; it takes a lot of data for most Machine Learning algorithms to
+	work properly. Even for very simple problems you typically need thousands of examples, and for
+	complex problems such as image or speech recognition you may need millions of examples (unless you
+	can reuse parts of an existing model).
+
+## 2->Nonrepresentative Training Data::
+	The set of countries we used earlier for training the linear model was not perfectly
+	representative; a few countries were missing.
+	shows what the data looks like when you add the missing countries.
+
+## 3->Poor-Quality Data::
+	Obviously, if your training data is full of errors, outliers, and noise (e.g., due to poor-quality
+	measurements), it will make it harder for the system to detect the underlying patterns, so your system is
+	less likely to perform well. It is often well worth the effort to spend time cleaning up your training data.
+	The truth is, most data scientists spend a significant part of their time doing just that.
+
+## 4->Irrelevant Features::
+	As the saying goes: garbage in, garbage out. Your system will only be capable of learning if the training
+	data contains enough relevant features and not too many irrelevant ones. A critical part of the success of a
+	Machine Learning project is coming up with a good set of features to train on. This process, called
+	feature engineering,
+
+	Feature selection: selecting the most useful features to train on among existing features.
+	Feature extraction: combining existing features to produce a more useful one (as we saw earlier,
+			     dimensionality reduction algorithms can help).
+	Creating new features by gathering new data.
+
+## 5->Overfitting the Training Data::
+	Say you are visiting a foreign country and the taxi driver rips you off. You might be tempted to say that all
+	taxi drivers in that country are thieves. Overgeneralizing is something that we humans do all too often, and
+	unfortunately machines can fall into the same trap if we are not careful. In Machine Learning this is called
+	overfitting: it means that the model performs well on the training data, but it does not generalize well.
+
+## 6->Underfitting the Training Data::
+	As you might guess, underfitting is the opposite of overfitting: it occurs when your model is too simple to
+	learn the underlying structure of the data. For example, a linear model of life satisfaction is prone to
+	underfit; reality is just more complex than the model.
+
+	Selecting a more powerful model, with more parameters.
+	Feeding better features to the learning algorithm (feature engineering).
+	Reducing the constraints on the model (e.g., reducing the regularization hyperparameter).
+
+## 7->Testing and Validating::
+	A better option is to split your data into two sets: the training set and the test set. As these names imply,
+	you train your model using the training set, and you test it using the test set. The error rate on new cases is
+	called the generalization error (or out-of-sample error), and by evaluating your model on the test set,
+	you get an estimation of this error. This value tells you how well your model will perform on instances it
+	has never seen before.
+	
+	If the training error is low (i.e., your model makes few mistakes on the training set) but the generalization
+	error is high, it means that your model is overfitting the training data.
+
+	It is common to use 80% of the data for training and hold out 20% for testing.
+	It is common to use 70% of the data for training and hold out 30% for testing.
+
+
+###############################################################################################################################
+###########################################################################################################################################
+
+
+#########################################################################################################
+############# End to End Machine Learining Project ######################################################
+#########################################################################################################
+
+		1. Look at the big picture.
+		2. Get the data.
+		3. Discover and visualize the data to gain insights.
+		4. Prepare the data for Machine Learning algorithms.
+		5. Select a model and train it.
+		6. Fine-tune your model.
+		7. Present your solution.
+		8. Launch, monitor, and maintain your system.
+#########################################################################################################
+
+###### Working with Real Data ##############################################################################
+
+When you are learning about Machine Learning it is best to actually experiment with real-world data, not
+just artificial datasets. Fortunately, there are thousands of open datasets to choose from, ranging across all
+sorts of domains. Here are a few places you can look to get data:
+
+	@@-Popular open data repositories:
+		->UC Irvine Machine Learning Repository.
+		->Kaggle datasets.
+		->Amazon’s AWS datasets.
+
+	@@-Meta portals (they list open data repositories):
+		->http://dataportals.org/
+		->http://opendatamonitor.eu/
+		->http://quandl.com/
+	
+
+	@@-Other pages listing many popular open data repositories:
+		->Wikipedia’s list of Machine Learning datasets
+		->Quora.com question
+		->Datasets subreddit
+
+###############################################################################################################
+
+########### 1->Look at the Big Picture ################################################################################
+	
+	<-->Frame the Problem:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		->First question to ask What exactly is the business objective.
+		->Building a model is probably not the end goal.
+		->How does the company expect to use and benefit from this model?
+		->This is important because it will determine how you frame the problem.
+		->What algorithms you will select.
+		->What performance measure you will use to evaluate your model.	
+		  and how much effort you should spend tweaking it.
+
+	<-->PIPELINES:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		->A sequence of data processing components is called a data pipeline. 
+		->Pipelines are very common in Machine Learning systems, 
+		->since there is a lot of data to manipulate and many data transformations to apply.
+	
+	<-->Next question to ask is what the current solution looks like (if any).>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		->It will often give you a reference performance, 
+		->as well as insights on how to solve the problem.	
+
+	<-->Okay, with all this information you are now ready to start designing your system.>>>>>>>>>>>>>>>>>>>>
+		->First, you need to frame the problem: is it supervised, unsupervised, or Reinforcement Learning? 
+		->Is it a classification task, a regression task, or something else?
+
+	<-->Select a Performance Measure:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		->A typical performance measure for regression problems is the Root Mean Square Error (RMSE). 
+		  It measures the standard deviation4 of the errors the system makes in its predictions.
+
+		->The Mean Absolute Error (also called the Average Absolute Deviation).
+		
+		->Both the RMSE and the MAE are ways to measure the distance between two vectors: 
+		  the vector of predictions and the vector of target values.
+
+	<-->Check the Assumptions:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		->Lastly, it is good practice to list and verify the assumptions that were made so far (by you or others); 
+		  this can catch serious issues early on.
+
+		->Your system just needs to get the category right. 
+		   If that’s so, then the problem should have been framed as a classification task, not a regression task. 
+		   You don’t want to find this out after working on a regression system for months.
+
+		->Fortunately, after talking with the team in charge of the downstream system, 
+		  you are confident that they do indeed need the actual prices, not just categories. 
+		  Great! You’re all set, the lights are green, and you can start coding now!
+###########################################################################################################################
+
+############## 2->Get the Data ###############################################################################################
+
+	<-->It’s time to get your hands dirty>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+		Canopy.
+		Jupyter notebook.
+		Anaconda and use its packaging system.
+		Python’s own packaging system, pip.
+                You can use your system’s packaging system:
+			apt-get on Ubuntu.
+			MacPorts or HomeBrew on macOS.
+
+	<-->Create the Workspace>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+		First you will need to have Python installed.
+		You will need a number of Python modules: Jupyter, NumPy, Pandas, Matplotlib, and Scikit-Learn.
+		If you already have Jupyter running with all these modules installed.
+		pip3 install --upgrade jupyter matplotlib numpy pandas scipy scikit-learn.
+
+
+	<-->Download the Data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		
+		In typical environments your data would be available in a relational database (or some other common datastore).
+		and spread across multiple tables/documents/files.
+		To access it, you would first need to get your credentials and access authorizations.
+		and familiarize yourself with the data schema.
+
+
+	import os
+	import tarfile
+	from six.moves import urllib
+	DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ageron/handson-ml/master/"
+	HOUSING_PATH = "datasets/housing"
+	HOUSING_URL = DOWNLOAD_ROOT + HOUSING_PATH + "/housing.tgz"
+	def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
+	if not os.path.isdir(housing_path):
+		os.makedirs(housing_path)
+	tgz_path = os.path.join(housing_path, "housing.tgz")
+	urllib.request.urlretrieve(housing_url, tgz_path)
+	housing_tgz = tarfile.open(tgz_path)
+	housing_tgz.extractall(path=housing_path)
+	housing_tgz.close()
+
+	
+	#Now let’s load the data using Pandas.
+
+	import pandas as pd
+	def load_housing_data(housing_path=HOUSING_PATH):
+		csv_path = os.path.join(housing_path, "housing.csv")
+		return pd.read_csv(csv_path)
+
+	#This function returns a Pandas DataFrame object containing all the data.
+
+	
+	<-->Take a Quick Look at the Data Structure >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		
+		#Let’s take a look at the top five rows using the DataFrame’s head() method
+
+		housing = load_housing_data()
+		housing.head()
+
+		#The info() method is useful to get a quick description of the data, in particular the total number of rows,
+		 and each attribute’s type and number of non-null values.
+		housing.info()
+
+		#Let’s look at the other fields. The describe() method shows a summary of the numerical attributes.
+		housing.describe()
+
+		
+		#You can either plot this one attribute at a time, or you can call thehist() method on the whole dataset, 
+		 and it will plot a histogram for each numerical attribute.
+		%matplotlib inline # only in a Jupyter notebook
+		import matplotlib.pyplot as plt
+		housing.hist(bins=50, figsize=(20,15))
+		plt.show()
+		
+
+		Notes:
+			The hist() method relies on Matplotlib, which in turn relies on a user-specified graphical backend to draw on your screen. So
+			before you can plot anything, you need to specify which backend Matplotlib should use. The simplest option is to use Jupyter’s
+			magic command %matplotlib inline. This tells Jupyter to set up Matplotlib so it uses Jupyter’s own backend. Plots are then
+			rendered within the notebook itself. Note that calling show() is optional in a Jupyter notebook, as Jupyter will automatically
+			display plots when a cell is executed.
+
+
+
+	<-->Create a Test Set:
+		from sklearn.model_selection import train_test_split
+		train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
+
+	
+	 <--> Looking for Correlations
+		you can easily compute the standard correlation coefficient (also
+		called Pearson’s r) between every pair of attributes using the corr() method:
+
+		housing.corr()
+
+
+	<-->Data Cleaning:
+		#You can accomplish these easily using DataFrame’s dropna(), drop(), and fillna() methods:
+		
+		housing.dropna(subset=["total_bedrooms"]) 	# option 1
+		housing.drop("total_bedrooms", axis=1) 	# option 2
+		median = housing["total_bedrooms"].median()
+		housing["total_bedrooms"].fillna(median) 	# option 3
+
+		#Scikit-Learn provides a handy class to take care of missing values: Imputer.
+		
+		from sklearn.preprocessing import Imputer
+		imputer = Imputer(strategy="median")
+
+		Consistency:: All objects share a consistent and simple interface:
+			Estimators:- Any object that can estimate some parameters based on a dataset is called an estimator (e.g., an imputer is an
+				    estimator). The estimation itself is performed by the fit() method, and it takes only a dataset as a parameter (or two for
+             				    supervised learning algorithms; the second dataset contains the labels). Any other parameter needed to guide the estimation
+				    process is considered a hyperparameter (such as an imputer’s strategy), and it must be set as an instance variable (generally
+				    via a constructor parameter).
+			Transformers:- Some estimators (such as an imputer) can also transform a dataset; these are called transformers. Once again,
+				        the API is quite simple: the transformation is performed by the transform() method with the dataset to transform as a
+				        parameter. It returns the transformed dataset. This transformation generally relies on the learned parameters, as is the case for
+				        an imputer. All transformers also have a convenience method called fit_transform() that is equivalent to calling fit() and
+				        then transform() (but sometimes fit_transform() is optimized and runs much faster).
+			Predictors:- Finally, some estimators are capable of making predictions given a dataset; they are called predictors. For example,
+				   the LinearRegression model in the previous chapter was a predictor: it predicted life satisfaction given a country’s GDP per
+				   capita. A predictor has a predict() method that takes a dataset of new instances and returns a dataset of corresponding
+				   predictions. It also has a score() method that measures the quality of the predictions given a test set (and the corresponding
+				   labels in the case of supervised learning algorithms).17
+			Inspection:- All the estimator’s hyperparameters are accessible directly via public instance variables (e.g., imputer.strategy),
+				    and all the estimator’s learned parameters are also accessible via public instance variables with an underscore suffix (e.g.,
+				    imputer.statistics_).
+
+
+		# Handling Text and Categorical Attributes
+			# Scikit-Learn provides a transformer for this task called LabelEncoder:
+			
+			from sklearn.preprocessing import LabelEncoder
+			encoder = LabelEncoder()
+			housing_cat = housing["Categorical_coloumn"]
+			housing_cat_encoded = encoder.fit_transform(housing_cat)
+			housing_cat_encoded
+
+			# one-hot encoding, because only one attribute will be equal to 1 (hot), while the others will be 0 (cold).
+				-Scikit-Learn provides a OneHotEncoder encoder to convert integer categorical values into one-hot
+				-vectors. Let’s encode the categories as one-hot vectors. Note that fit_transform() expects a 2D array,
+				-but housing_cat_encoded is a 1D array, so we need to reshape it:
+
+			from sklearn.preprocessing import OneHotEncoder
+			encoder = OneHotEncoder()
+			housing_cat_1hot = encoder.fit_transform(housing_cat_encoded.reshape(-1,1))
+			housing_cat_1hot
+
+			#  Notice that the output is a SciPy sparse matrix, instead of a NumPy array. This is very useful when you
+			    have categorical attributes with thousands of categories. After one-hot encoding we get a matrix with
+			    thousands of columns, and the matrix is full of zeros except for one 1 per row. Using up tons of memory
+			    mostly to store zeros would be very wasteful, so instead a sparse matrix only stores the location of the
+			    nonzero elements. You can use it mostly like a normal 2D array,19 but if you really want to convert it to a
+			    (dense) NumPy array, just call the toarray() method:
+
+			housing_cat_1hot.toarray()
+
+			# -We can apply both transformations (from text categories to integer categories, then from integer categories
+			    to one-hot vectors) in one shot using the LabelBinarizer class:
+
+			from sklearn.preprocessing import LabelBinarizer
+			encoder = LabelBinarizer()
+			housing_cat_1hot = encoder.fit_transform(housing_cat)
+			housing_cat_1hot
+
+		
+		# Feature Scaling:
+			# There are two common ways to get all attributes to have the same scale: min-max scaling and standardization.
+			Min-max scaling (many people call this normalization) is quite simple: values are shifted and rescaled
+			so that they end up ranging from 0 to 1. We do this by subtracting the min value and dividing by the max
+			minus the min. Scikit-Learn provides a transformer called MinMaxScaler for this. It has a
+			feature_range hyperparameter that lets you change the range if you don’t want 0–1 for some reason.
+			
+			Standardization is quite different: first it subtracts the mean value (so standardized values always have a
+			zero mean), and then it divides by the variance so that the resulting distribution has unit variance. Unlike
+			min-max scaling, standardization does not bound values to a specific range, which may be a problem for
+			some algorithms (e.g., neural networks often expect an input value ranging from 0 to 1). However,
+			standardization is much less affected by outliers. For example, suppose a district had a median income
+			equal to 100 (by mistake). Min-max scaling would then crush all the other values from 0–15 down to 0–
+			0.15, whereas standardization would not be much affected. Scikit-Learn provides a transformer called
+			StandardScaler for standardization.
+		
+
+		# Training and Evaluating on the Training Set:
+			#Now that the model is trained, let’s evaluate it on the training set:
+			#Let’s measure this regression model’s RMSE on the whole training set using Scikit-Learn’s mean_squared_error function:
+			
+			from sklearn.metrics import mean_squared_error
+			line_mse = mean_squared_error(y,y_pred)
+			line_rmse = np.sqrt(line_mse)
+			print(line_rmse)
+
+		# Better Evaluation Using Cross-Validation:
+			#A great alternative is to use Scikit-Learn’s cross-validation feature. The following code performs K-fold
+			#cross-validation: it randomly splits the training set into 10 distinct subsets called folds, then it trains and
+			#evaluates the Decision Tree model 10 times, picking a different fold for evaluation every time and
+			#training on the other 9 folds. The result is an array containing the 10 evaluation scores:
+
+
+			from sklearn.model_selection import cross_val_score
+			scores = cross_val_score(regressor, X,y,scoring="neg_mean_squared_error",cv=10)
+			rmse_scores = np.sqrt(-scores)
+
+			def display_scores(scores):
+				print("Scores:",scores)
+				print("Mean:",scores.mean())
+				print("Standard deviation:",scores.std())
+
+			display_scores(rmse_scores)
+
+		# Grid Search:
+			#Instead you should get Scikit-Learn’s GridSearchCV to search for you. All you need to do is tell it which
+			#hyperparameters you want it to experiment with, and what values to try out, and it will evaluate all the
+			#possible combinations of hyperparameter values, using cross-validation. For example, the following code
+			#searches for the best combination of hyperparameter values for the RandomForestRegressor:
+
+			from sklearn.model_selection import GridSearchCV
+			param_grid = [
+				{'n_estimators': [3, 10, 30], 'max_features': [2, 4, 6, 8]},
+				{'bootstrap': [False], 'n_estimators': [3, 10], 'max_features': [2, 3, 4]},
+				]
+			forest_reg = RandomForestRegressor()
+			grid_search = GridSearchCV(forest_reg, param_grid, cv=5,
+					scoring='neg_mean_squared_error')
+			grid_search.fit(housing_prepared, housing_labels)
+
+
+		# Randomized Search
+			#The grid search approach is fine when you are exploring relatively few combinations, like in the previous
+			#example, but when the hyperparameter search space is large, it is often preferable to use
+			#RandomizedSearchCV instead. This class can be used in much the same way as the GridSearchCV class,
+			#but instead of trying out all possible combinations, it evaluates a given number of random combinations
+			#by selecting a random value for each hyperparameter at every iteration. This approach has two main
+				benefits::
+					-If you let the randomized search run for, say, 1,000 iterations, this approach will explore 1,000
+					 different values for each hyperparameter (instead of just a few values per hyperparameter with the
+					 grid search approach).
+					-You have more control over the computing budget you want to allocate to hyperparameter search,
+					  simply by setting the number of iterations.
+		
+
+		# Ensemble Methods:
+			#Another way to fine-tune your system is to try to combine the models that perform best. The group (or
+			#“ensemble”) will often perform better than the best individual model (just like Random Forests perform
+			#better than the individual Decision Trees they rely on), especially if the individual models make very
+			#different types of errors.
+			
+
+
+
+		
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+
+

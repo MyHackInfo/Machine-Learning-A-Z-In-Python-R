@@ -14,7 +14,10 @@ imputer = Imputer(missing_values= 'NaN',strategy= 'mean',axis = 0)
 imputer = imputer.fit(X[:,1:3])
 X[:,1:3] = imputer.transform(X[:,1:3])
 
+# Handling Text and Categorical Attributes
+# Scikit-Learn provides a transformer for this task called LabelEncoder:
 # Encoding categorical data
+
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 labelencoder_X = LabelEncoder()
 X[:, 0] = labelencoder_X.fit_transform(X[:,0])

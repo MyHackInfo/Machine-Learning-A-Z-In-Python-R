@@ -30,6 +30,21 @@ regressor.fit(X, y)
 # Predicting a new result
 y_pred = regressor.predict(6.5)
 
+print(y_pred)
+
+'''
+from sklearn.model_selection import GridSearchCV
+param_grid = [{'n_estimators': [3, 10, 30], 'max_features': [2, 4, 6, 8]},
+              {'bootstrap': [False], 'n_estimators': [3, 10], 'max_features': [2, 3, 4]},
+              ]
+forest_reg = RandomForestRegressor()
+grid_search = GridSearchCV(forest_reg, param_grid, cv=5,
+                            scoring='neg_mean_squared_error')
+grid_search.fit(X,y)
+print(grid_search)
+'''
+
+'''
 # Visualising the Random Forest Regression results (higher resolution)
 X_grid = np.arange(min(X), max(X), 0.01)
 X_grid = X_grid.reshape((len(X_grid), 1))
@@ -39,3 +54,4 @@ plt.title('Truth or Bluff (Random Forest Regression)')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
 plt.show()
+'''
